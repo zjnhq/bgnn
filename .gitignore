@@ -2,3 +2,4 @@ datasets/
 *pycache*
 results/
 *egg*
+catboost_info/

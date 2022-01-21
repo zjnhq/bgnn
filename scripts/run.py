@@ -1,14 +1,16 @@
 # from catboost import CatboostError
-# import sys
-# sys.path.append('../')
 
+import os
+import sys
+print(sys.path)
+sys.path.append(r'E:/code/forest/bgnn')
 from bgnn.models.GBDT import GBDTCatBoost, GBDTLGBM
 from bgnn.models.MLP import MLP
 from bgnn.models.GNN import GNN
 from bgnn.models.BGNN import BGNN
 from bgnn.scripts.utils import NpEncoder
 
-import os
+
 import json
 import time
 import datetime
@@ -22,7 +24,7 @@ import numpy as np
 import fire
 from omegaconf import OmegaConf
 from sklearn.model_selection import ParameterGrid
-
+from pdb import *
 
 class RunModel:
     def read_input(self, input_folder):
@@ -272,4 +274,7 @@ class RunModel:
         print(f'Finished {dataset}: {time.time() - start2run} sec.')
 
 if __name__ == '__main__':
+    # set_trace()
+    # print(sys.path)
+    # sys.path.append(r'E:/code/forest/bgnn')
     fire.Fire(RunModel().run)
