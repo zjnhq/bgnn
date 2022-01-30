@@ -31,6 +31,9 @@ class BaseModel(torch.nn.Module):
         graph = transform(graph)
         return graph.to(self.device)
 
+    def build_edge_features_networkx(self, networkx_graph):
+        pass
+
     def move_to_device(self, *args):
         return [arg.to(self.device) for arg in args]
 

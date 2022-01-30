@@ -1,9 +1,8 @@
 hp:
   iter_per_epoch:
-  - 2
-  - 4
+  - 10
   lr:
-  - 0.01
+  # - 0.01
   - 0.1
   hidden_dim:
   - 64
@@ -13,11 +12,13 @@ hp:
   - agnn
   - appnp
   only_gbdt:
-  - false
   - true
+  use_graphgbm:
+  - 0.1
+  - 0
   dropout:
   - 0.
-  - 0.5
+  # - 0.5
   depth:
   - 6
 num_epochs: 20

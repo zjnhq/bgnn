@@ -3,3 +3,12 @@ datasets/
 results/
 *egg*
 catboost_info/
+build/lib/models/__init__.py
+build/lib/models/Base.py
+build/lib/models/BGNN.py
+build/lib/models/GBDT.py
+build/lib/models/GNN.py
+build/lib/models/MLP.py
+build/lib/scripts/__init__.py
+build/lib/scripts/run.py
+build/lib/scripts/utils.py

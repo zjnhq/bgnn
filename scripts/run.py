@@ -2,8 +2,7 @@
 
 import os
 import sys
-print(sys.path)
-sys.path.append(r'E:/code/forest/bgnn')
+sys.path.append(r'E:/code/forest/bgnn/')
 from bgnn.models.GBDT import GBDTCatBoost, GBDTLGBM
 from bgnn.models.MLP import MLP
 from bgnn.models.GNN import GNN
@@ -108,6 +107,8 @@ class RunModel:
             runs = []
             runs_custom = []
             times = []
+            # set_trace()
+            print(ps)
             for _ in range(self.repeat_exp):
                 start = time.time()
                 model = self.define_model(model_name, ps)
@@ -117,6 +118,7 @@ class RunModel:
                 if model_name in ['gnn', 'resgnn', 'bgnn']:
                     inputs['networkx_graph'] = self.networkx_graph
 
+                # set_trace()
                 metrics = model.fit(num_epochs=self.config.num_epochs, patience=self.config.patience,
                            loss_fn=f"{self.seed_folder}/{exp_name}.txt",
                            metric_name='loss' if self.task == 'regression' else 'accuracy', **inputs)
@@ -219,7 +221,7 @@ class RunModel:
             save_folder: str = None,
             task: str = 'regression',
             repeat_exp: int = 1,
-            max_seeds: int = 5,
+            max_seeds: int = 2,
             dataset_dir: str = None,
             config_dir: str = None
             ):
@@ -238,6 +240,7 @@ class RunModel:
 
         self.seed_results = dict()
         for ix, seed in enumerate(self.masks):
+            # set_trace()
             print(f'{dataset} Seed {seed}')
             self.seed = seed
 
@@ -266,6 +269,8 @@ class RunModel:
                     self.run_one_model(config_fn=config_dir / 'resgnn.yaml', model_name="resgnn")
                 elif arg == 'bgnn':
                     self.run_one_model(config_fn=config_dir / 'bgnn.yaml', model_name="bgnn")
+                elif arg == 'graph_bgnn':
+                    self.run_one_model(config_fn=config_dir / 'graph_bgnn.yaml', model_name="bgnn")
 
             self.save_results(seed)
             if ix+1 >= max_seeds:
@@ -274,7 +279,5 @@ class RunModel:
         print(f'Finished {dataset}: {time.time() - start2run} sec.')
 
 if __name__ == '__main__':
-    # set_trace()
-    # print(sys.path)
-    # sys.path.append(r'E:/code/forest/bgnn')
+
     fire.Fire(RunModel().run)

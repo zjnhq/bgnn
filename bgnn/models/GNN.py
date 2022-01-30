@@ -13,7 +13,7 @@ from torch.autograd import Variable
 from collections import defaultdict as ddict
 from .MLP import MLPRegressor
 
-
+from pdb import *
 class ElementWiseLinear(nn.Module):
     def __init__(self, size, weight=True, bias=True, inplace=False):
         super().__init__()
@@ -101,6 +101,7 @@ class GATDGL(torch.nn.Module):
         self.activation = activation
 
     def forward(self, graph, feat):
+        set_trace()
         h = feat
         h = self.input_drop(h)
 
@@ -160,6 +161,7 @@ class GNNModelDGL(torch.nn.Module):
 
 
     def forward(self, graph, features):
+        # set_trace()
         h = features
         if self.use_mlp:
             if self.join_with_mlp:

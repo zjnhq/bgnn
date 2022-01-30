@@ -5,10 +5,14 @@ import pandas as pd
 import torch.nn.functional as F
 import numpy as np
 from sklearn.metrics import r2_score, accuracy_score
-
+from pdb import *
 class BaseModel(torch.nn.Module):
     def __init__(self):
         super(BaseModel, self).__init__()
+
+        set_trace()
+        print("__init__")
+        print (BaseModel)
         self.device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
     def pandas_to_torch(self, *args):

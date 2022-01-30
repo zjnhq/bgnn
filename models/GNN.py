@@ -12,7 +12,7 @@ from .Base import BaseModel
 from torch.autograd import Variable
 from collections import defaultdict as ddict
 from .MLP import MLPRegressor
-
+from pdb import *
 
 class ElementWiseLinear(nn.Module):
     def __init__(self, size, weight=True, bias=True, inplace=False):
@@ -126,6 +126,7 @@ class GNNModelDGL(torch.nn.Module):
     def __init__(self, in_dim, hidden_dim, out_dim,
                  dropout=0., name='gat', residual=True, use_mlp=False, join_with_mlp=False):
         super(GNNModelDGL, self).__init__()
+        set_trace()
         self.name = name
         self.use_mlp = use_mlp
         self.join_with_mlp = join_with_mlp
@@ -233,6 +234,7 @@ class GNN(BaseModel):
             cat_features=None, patience=200, logging_epochs=1, optimize_node_features=False,
             loss_fn=None, metric_name='loss', normalize_features=True, replace_na=True):
 
+        set_trace()
         # initialize for early stopping and metrics
         if metric_name in ['r2', 'accuracy']:
             best_metric = [np.float('-inf')] * 3  # for train/val/test

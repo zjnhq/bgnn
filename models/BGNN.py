@@ -8,13 +8,14 @@ from .GNN import GNNModelDGL, GATDGL
 from .Base import BaseModel
 from tqdm import tqdm
 from collections import defaultdict as ddict
-
+from pdb import set_trace
 class BGNN(BaseModel):
     def __init__(self,
                  task='regression', iter_per_epoch = 10, lr=0.01, hidden_dim=64, dropout=0.,
                  only_gbdt=False, train_non_gbdt=False,
                  name='gat', use_leaderboard=False, depth=6, gbdt_lr=0.1):
         super(BaseModel, self).__init__()
+        set_trace()
         self.learning_rate = lr
         self.hidden_dim = hidden_dim
         self.task = task
@@ -58,6 +59,7 @@ class BGNN(BaseModel):
         return gbdt_model
 
     def init_gnn_model(self):
+        set_trace()
         if self.use_leaderboard:
             self.model = GATDGL(in_feats=self.in_dim, n_classes=self.out_dim).to(self.device)
         else:
@@ -75,6 +77,7 @@ class BGNN(BaseModel):
     def train_gbdt(self, gbdt_X_train, gbdt_y_train, cat_features, epoch,
                    gbdt_trees_per_epoch, gbdt_alpha):
 
+        set_trace()
         pool = Pool(gbdt_X_train, gbdt_y_train, cat_features=cat_features)
         epoch_gbdt_model = self.fit_gbdt(pool, gbdt_trees_per_epoch, epoch)
         if epoch == 0 and self.task=='classification':
@@ -137,6 +140,7 @@ class BGNN(BaseModel):
             num_epochs, patience, logging_epochs=1, loss_fn=None, metric_name='loss',
             normalize_features=True, replace_na=True,
             ):
+        set_trace()
 
         # initialize for early stopping and metrics
         if metric_name in ['r2', 'accuracy']:
@@ -159,6 +163,7 @@ class BGNN(BaseModel):
 
         self.init_gnn_model()
 
+        set_trace()
         gbdt_X_train = X.iloc[train_mask]
         gbdt_y_train = y.iloc[train_mask]
         gbdt_alpha = 1
@@ -187,6 +192,7 @@ class BGNN(BaseModel):
 
         pbar = tqdm(range(num_epochs))
         for epoch in pbar:
+            print("here")
             start2epoch = time.time()
 
             # gbdt part
