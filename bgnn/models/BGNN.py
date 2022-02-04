@@ -16,7 +16,7 @@ class BGNN(BaseModel):
     def __init__(self,
                  task='regression', iter_per_epoch = 10, lr=0.01, hidden_dim=64, dropout=0.,
                  only_gbdt=False, train_non_gbdt=False,
-                 name='gat', use_leaderboard=False, depth=6, gbdt_lr=0.1, use_graphgbm = 1):
+                 name='gat', use_leaderboard=False, depth=6, gbdt_lr=0.1, use_graphgbm = 0):
         super(BaseModel, self).__init__()
         self.learning_rate = lr
         self.hidden_dim = hidden_dim
@@ -152,7 +152,7 @@ class BGNN(BaseModel):
                 print("update function cannot apply here")
             else:
                 graph_predictions = self.update_binode_prediction(predictions, self.edge_features, self.edge_starts)
-                predictions = predictions* (1-self.graphgbm_beta)+ graph_predictions
+                predictions = predictions+ graph_predictions
         if not self.only_gbdt:
             if self.train_residual:
                 predictions = np.append(node_features.detach().cpu().data[:, :-self.out_dim], predictions,
